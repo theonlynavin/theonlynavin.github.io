@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-08-14T20:39:32+05:30</updated><id>http://localhost:4000/atom.xml</id><title type="html">theonlynavin</title><subtitle>Fragments, Handpicks, and a gallery of cats, landscapes, and 3D art.</subtitle><author><name>Navin Kumar</name><email>navinkumar.social@gmail.com</email></author><entry><title type="html">Beyond Measure?</title><link href="http://localhost:4000/mathematics/2025/03/20/beyond-measure.html" rel="alternate" type="text/html" title="Beyond Measure?" /><published>2025-03-20T00:00:00+05:30</published><updated>2025-07-15T00:55:52+05:30</updated><id>http://localhost:4000/mathematics/2025/03/20/beyond-measure</id><content type="html" xml:base="http://localhost:4000/mathematics/2025/03/20/beyond-measure.html"><![CDATA[<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>I’d like to turn the next few paragraphs into a conversation between us. Along the way, I hope to answer any questions that naturally arise in your mind. My words here will attempt to be a “gotcha” — but in a good way. What I want to show you in the next five minutes is that measuring things is not as innocent as it seems. To many, the act of measuring and comparing might feel trivial. If you think measuring is just an insignificant exercise, then by the end of this read, I hope to convince you otherwise — that measurement is an art, far from trivial.</p>
+
+<blockquote>
+  <p><em>“Measure what is measurable, and make measurable what is not so.”</em><br />
+— Galileo Galilei</p>
+</blockquote>
+
+<p>Measure theory is a field of mathematics that helps you assign, well, measures to things which help you quantify them. It forms the underlying formalisms behind probability theory, geometric measures (such as lengths, volumes and areas) and much more. The foundations of modern measure theory were laid in the works of mathematicians such as Émile Borel, Henri Lebesgue and Constantin Carathéodory.</p>
+
+<p>We’ll begin this discussion by talking a bit about measuring sets. First, let’s lay down some rules that a valid measure must satisfy:</p>
+
+<ul>
+  <li>The measure of the empty set must be zero.</li>
+  <li>The measure of any set (if it exists) must be non-negative.</li>
+  <li>The measure must be additive over countable collections of disjoint sets.</li>
+</ul>
+
+<p>That is, if we consider a collection of pairwise disjoint sets \(\{E_i\}_{i=0}^{\infty}\), then:</p>
+
+\[\text{measure} \left(\bigcup_{i=0}^{\infty} E_i\right) = \sum_{i=0}^{\infty} \text{measure}(E_i).\]
+
+<p>These rules seem perfectly reasonable. After all, we’re just saying that the measure of “nothing” should be zero, and the measure of “the whole” should be the sum of its parts.</p>
+
+<p>Now, let’s consider a measure \(m\) on the real numbers. Under this measure, the measure of an interval \((a, b)\) is simply \(\|b-a\|\), and the measure of an individual point \(\{c\}\) is 0. You can think of this as measuring the “length” of a given set. If we feed this measure a collection of line segments and points on the real line, the output is just the sum of the lengths of the line segments. Points are treated as insignificantly tiny. This measure obeys all the required rules. The length of nothing is zero. The length of a union of disconnected segments is the sum of their lengths.</p>
+
+<hr />
+
+<p>So far, so good. But now, let me pose a question:</p>
+
+<blockquote>
+  <p><strong>Under this measure, is the measure of <em>every</em> subset of the real numbers well-defined?</strong></p>
+</blockquote>
+
+<p>Take a moment to think about it.</p>
+
+<p>Intuitively, the answer seems like an obvious “yes.” Any subset of the real numbers can be broken down into a series of points and line segments, and its measure should just be the sum of those parts, right?</p>
+
+<p>Well then, indulge me in a small journey. In this journey, I assume that you are aware of the idea that certain infinities are larger than other infinities and, in particular, that the set of rationals is countably infinite and the set of reals is uncountably infinite. If not, feel free to pause and explore that before continuing.</p>
+
+<hr />
+
+<h2 id="a-rational-partition">A Rational Partition</h2>
+
+<p>Consider a circle \(C\). We can represent each point on the circle by the angle a ray from the center to that point makes with some fixed axis. So, each point on the circle corresponds to an angle between \(0\) and \(2\pi\). The number of points on this circle is uncountably infinite, and under our measure \(m\), its total measure is simply \(\|2\pi - 0\| = 2\pi.\)</p>
+
+<p>Now, pick an arbitrary point \(p\) on the circle. Define its <em>rotation set</em> \(R_p\) as the collection of all points obtained by rotating $p$ about the center by rational multiples of \(\pi\). This set \(R_p\) is countably infinite because the rationals themselves are countable.</p>
+
+<p>I claim that the entire circle \(C\) can be partitioned into uncountably many disjoint rotation sets like \(R_p\).</p>
+
+<p>Why is this possible? Suppose a point \(x\) were not included in our partition. We could simply generate a rotation set \(R_x\) and add it. But are we sure these rotation sets are disjoint? Yes. Suppose \(R_{p_1}\) and \(R_{p_2}\) shared a point \(x\). That would mean starting from \(p_1\), you can reach \(x\) via some rational rotation \(k_1\pi\), and starting from \(p_2\), you can also reach \(x\) via another rational rotation \(k_2\pi\). This implies that you can reach \(p_2\) from \(p_1\) by a rational rotation of \((k_1-k_2)\pi\), meaning that \(R_{p_1}\) and \(R_{p_2}\) are actually the same set.</p>
+
+<p>Are you now convinced that the circle can be partitioned as an uncountably infinite union of such countably infinite rotation sets?</p>
+
+<hr />
+
+<h2 id="a-giant-set">A Giant Set</h2>
+
+<p>Now, construct a set \(X\) by picking exactly one point from each <em>rotation set</em>. Since the partition is uncountably infinite, $X$ must also be uncountably infinite. Also recall that no two partitions share points which can be traversed by rational rotations, so no points in $X$ differ by rational rotations.</p>
+
+<p>Now, consider <em>all</em> rational rotations of the set \(X\). That is, we take \(X\) and rotate every point in it by a rational multiple of \(\pi\). I claim that these rational rotations of \(X\) cover the entire circle \(C\).</p>
+
+<p>Why do all rational rotations of the set \(X\) cover the entire circle? Say a point \(p\) is left behind uncovered by the rational rotations of \(X\). Regardless of this, \(p\) must have been a part of some rotation set \(R_p\). And since in forming \(X\) we picked an element from each rotation set forming the circle, we must have picked some point from \(R_p\). This point must have been \(p\) itself or some rational rotation of \(p\). If it were \(p\) then \(p\) could not have been left behind by \(X\) and if it were some rational rotation of \(p\) then it must be covered by some rational rotation of \(X\).</p>
+
+<p>Why can no two rational rotations of the set \(X\) have any element in common? Because if they were to have an element in common then that would imply that elements within the set \(X\) itself differ by rational rotations, which is impossible the way we constructed \(X\) to begin with.</p>
+
+<p>Sounds good? We have partitioned the circle as:</p>
+
+\[C = \bigcup_{i=0}^{\infty} X_i\]
+
+<p>where each \(X_i\) is some rational rotation of \(X\). A countably infinite union (since the number of rationals is countably infinite) of uncountably infinite sets (\(X\) is uncountable to begin with).</p>
+
+<hr />
+
+<h2 id="the-catch">The Catch</h2>
+
+<p>Alright! Recall the property that measures are additive over countable collections of pairwise disjoint sets.</p>
+
+\[\text{measure}(C) = 2\pi = \sum_{i=0}^{\infty} \text{measure}(X_i)\]
+
+<p>Since each \(X_i\) is just \(X\) rotated, its measure must be the same for all \(i\). Let this measure be \(\alpha\). Then:</p>
+
+\[2\pi = \sum_{i=0}^{\infty} \alpha\]
+
+<p>But now we have a problem:</p>
+
+<ul>
+  <li>If \(\alpha\) is any positive finite number, then the sum diverges to infinity.</li>
+  <li>If \(\alpha\) is zero, then we get \(2\pi = 0\).</li>
+</ul>
+
+<p>Both are contradictions. Aren’t we in a pickle now? The only resolution? Accept that these sets \(X_i\) simply have no well-defined measure!</p>
+
+<p>It seems we have to disappoint Galileo after all. Some things in nature are simply immeasurable.</p>
+
+<hr />
+
+<p>The existence of non-measurable sets is what leads to several paradoxes in mathematics. A particularly famous paradox is the Banach–Tarski paradox, where given a solid ball you can break the ball into a finite number of disjoint subsets, which can then be put back together in a different way to yield two identical copies of the original ball.</p>
+
+<p>Isn’t the seemingly simple question of “how big” or “how much” something is, a very intricate one?</p>]]></content><author><name>Navin Kumar</name><email>navinkumar.social@gmail.com</email></author><category term="Mathematics" /><category term="mathematics" /><category term="measure theory" /><category term="paradox" /><summary type="html"><![CDATA[]]></summary></entry></feed>

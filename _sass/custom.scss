@@ -1,0 +1,49 @@
+/* Layout for in-page sidebars */
+.sidebar-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 1rem;
+}
+.local-sidebar {
+  position: sticky; top: 1rem; align-self: start;
+  background: var(--mm-color-bg-alt, #111);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px;
+  padding: .75rem;
+  max-height: calc(100vh - 2rem);
+}
+.local-sidebar.collapsed { display: none; }
+.sidebar-toggle {
+  display: none; margin-bottom: .5rem; width: 100%;
+}
+.local-nav a { display: block; padding: .5rem .6rem; border-radius: 8px; text-decoration: none; }
+.local-nav a:hover, .local-nav a.active { background: rgba(255,255,255,.06); }
+
+/* Content area */
+.local-view { min-height: 40vh; }
+
+/* Masonry (Pinterest-like) */
+.masonry { column-width: 320px; column-gap: 16px; }
+.masonry-item { break-inside: avoid; margin: 0 0 16px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,.08); background: var(--mm-color-bg-alt, #111); }
+.masonry-item img { width: 100%; height: auto; display: block; }
+.masonry-item .caption { padding: 8px 10px; font-size: .9rem; opacity: .85; }
+
+/* Cards for fragments */
+.card { border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 14px; margin: 0 0 12px; background: var(--mm-color-bg-alt, #111); }
+.card h3 { margin: 0 0 6px; font-size: 1.05rem; }
+.card a { text-decoration: none; }
+
+/* Lightbox */
+.lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.8); display: none; align-items: center; justify-content: center; z-index: 50; }
+.lightbox.open { display: flex; }
+.lightbox img { max-width: 92vw; max-height: 88vh; border-radius: 12px; }
+
+/* Route-like transitions inside page */
+.fade-enter { opacity: 0; transform: translateY(6px); }
+.fade-enter.fade-enter-active { opacity: 1; transform: translateY(0); transition: opacity .25s ease, transform .25s ease; }
+
+/* Responsive: show a toggle button for small screens */
+@media (max-width: 960px) {
+  .sidebar-layout { grid-template-columns: 1fr; }
+  .sidebar-toggle { display: inline-block; }
+}
