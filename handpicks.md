@@ -6,6 +6,9 @@ collection: handpicks
 entries_layout: grid
 ---
 
+
+> A collection of movies, video games and animes that I think you should try out!
+
 <style>
   img {
     width: 100%;
