@@ -20,7 +20,7 @@ locale: en-US
 title: "theonlynavin"
 description: "Fragments, Handpicks, and a gallery of cats, landscapes, and 3D art."
 baseurl: "/" # the subpath of your site, e.g. "/blog"
-url: # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+url: theonlynavin.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 logo: "/assets/images/icon.jpg" # path of site logo, e.g. "/assets/assets/images/logo.png"
 date_format: "%B %-d, %Y"
 read_time: true
