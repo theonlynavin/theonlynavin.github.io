@@ -16,21 +16,21 @@
   
     
     <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Handpicks | theonlynavin</title>
+<title>Gallery | theonlynavin</title>
 <meta name="generator" content="Jekyll v3.10.0" />
-<meta property="og:title" content="Handpicks" />
+<meta property="og:title" content="Gallery" />
 <meta name="author" content="Navin Kumar" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Fragments, Handpicks, and a gallery of cats, landscapes, and 3D art." />
 <meta property="og:description" content="Fragments, Handpicks, and a gallery of cats, landscapes, and 3D art." />
-<link rel="canonical" href="http://localhost:4000/handpicks/" />
-<meta property="og:url" content="http://localhost:4000/handpicks/" />
+<link rel="canonical" href="http://localhost:4000/gallery.html" />
+<meta property="og:url" content="http://localhost:4000/gallery.html" />
 <meta property="og:site_name" content="theonlynavin" />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Handpicks" />
+<meta property="twitter:title" content="Gallery" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Navin Kumar"},"description":"Fragments, Handpicks, and a gallery of cats, landscapes, and 3D art.","headline":"Handpicks","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/images/icon.jpg"},"name":"Navin Kumar"},"url":"http://localhost:4000/handpicks/"}</script>
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Navin Kumar"},"description":"Fragments, Handpicks, and a gallery of cats, landscapes, and 3D art.","headline":"Gallery","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/images/icon.jpg"},"name":"Navin Kumar"},"url":"http://localhost:4000/gallery.html"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -57,7 +57,7 @@
 </head>
 
 
-  <body class="layout--collection page--wide handpicks">
+  <body class="layout--gallery  gallery">
     <nav class="skip-links">
   <h2 class="screen-reader-text">Skip links</h2>
   <ul>
@@ -102,64 +102,160 @@
       <header class="page-header">
         
         
-          <h1 id="page-title" class="page-title">Handpicks</h1>
+          <h1 id="page-title" class="page-title">Gallery</h1>
         
       </header>
       <div class="page-content">
         <style>
-  img {
+  /* Masonry layout */
+  .masonry {
+    column-count: auto;
+    column-width: 250px;
+    column-gap: 1rem;
+  }
+  .masonry a {
+    display: block;
+    margin-bottom: 1rem;
+    break-inside: avoid;
+  }
+  .masonry img {
     width: 100%;
     height: auto;
     display: block;
     border-radius: 12px;
     transform: scale(1);
-    opacity: 1;
+    opacity: 0;
+    cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.6s ease;
+  }
+  .masonry img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
   }
 </style>
 
-
-
-<div class="entries-grid">
+<!-- Masonry gallery -->
+<div class="masonry" id="gallery">
   
-
-
-
-<article class="entry h-entry">
-  <header class="entry-header">
-    <h3 class="entry-title p-name">
-      
-        <a href="/handpicks/hollow-knight/" rel="bookmark">Hollow Knight
-</a>
-      
-    </h3>
+  
     
-      
-      
-      
-      <img class="entry-image u-photo" src="/assets/images/handpicks/Hollow_Knight_first_cover_art.webp.png" alt="">
+  
     
-  </header>
+      <a href="/assets/gallery/cats/close_cat.jpg" class="glightbox" data-gallery="gallery1" data-title="close_cat.jpg">
+        <img src="/assets/gallery/cats/close_cat.jpg" loading="lazy" alt="close_cat.jpg" />
+      </a>
+    
   
-    <div class="entry-excerpt p-summary">
-      
-        
-
-      
-    </div>
+    
+      <a href="/assets/gallery/cats/sleepy_cat.jpg" class="glightbox" data-gallery="gallery1" data-title="sleepy_cat.jpg">
+        <img src="/assets/gallery/cats/sleepy_cat.jpg" loading="lazy" alt="sleepy_cat.jpg" />
+      </a>
+    
   
+    
   
-    <footer class="entry-meta">
-      
-
-<span class="read-time">~1 min read</span>
-
-      
-    </footer>
+    
   
-</article>
-
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
 </div>
+
+<!-- Load GLightbox only if not already loaded -->
+<script>
+(function() {
+  // Fade-in effect
+  document.querySelectorAll('#gallery img').forEach(img => {
+    img.onload = () => img.style.opacity = '1';
+  });
+
+  function initGLightbox() {
+    // Only target links inside #gallery
+    if (!window.galleryLightbox) {
+      window.galleryLightbox = GLightbox({
+        selector: '#gallery .glightbox',
+        touchNavigation: true,
+        loop: true,
+        zoomable: true,
+        autoplayVideos: false
+      });
+    }
+  }
+
+  // Load GLightbox if not loaded already
+  if (typeof GLightbox === 'undefined') {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css';
+    document.head.appendChild(link);
+
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js';
+    script.onload = initGLightbox;
+    document.body.appendChild(script);
+  } else {
+    initGLightbox();
+  }
+})();
+</script>
+
 
 
         

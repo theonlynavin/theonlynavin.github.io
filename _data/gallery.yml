@@ -1,0 +1,7 @@
+# _data/gallery.yml
+- src: /assets/gallery/cats/close_cat.jpg
+  alt: "Close cat"
+  caption: "A close loaf"
+- src: /assets/gallery/cats/sleepy_cat.jpg
+  alt: "Sleepy cat"
+  caption: "A cat in deep slumber"

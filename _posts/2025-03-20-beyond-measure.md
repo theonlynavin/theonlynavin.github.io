@@ -6,10 +6,11 @@ tags:
   - mathematics
   - measure theory
   - paradox
+layout: post
 last_modified_at: 2025-07-14T14:25:52-05:00
 ---
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
+ <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> 
+ 
 I'd like to turn the next few paragraphs into a conversation between us. Along the way, I hope to answer any questions that naturally arise in your mind. My words here will attempt to be a “gotcha” — but in a good way. What I want to show you in the next five minutes is that measuring things is not as innocent as it seems. To many, the act of measuring and comparing might feel trivial. If you think measuring is just an insignificant exercise, then by the end of this read, I hope to convince you otherwise — that measurement is an art, far from trivial.
 
 > *"Measure what is measurable, and make measurable what is not so."*  
