@@ -20,7 +20,7 @@ title: Gallery
     display: block;
     border-radius: 12px;
     transform: scale(1);
-    opacity: 0;
+    opacity: 1;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.6s ease;
   }
@@ -44,41 +44,3 @@ title: Gallery
     {% endif %}
   {% endfor %}
 </div>
-
-<!-- Load GLightbox only if not already loaded -->
-<script>
-(function() {
-  // Fade-in effect
-  document.querySelectorAll('#gallery img').forEach(img => {
-    img.onload = () => img.style.opacity = '1';
-  });
-
-  function initGLightbox() {
-    // Only target links inside #gallery
-    if (!window.galleryLightbox) {
-      window.galleryLightbox = GLightbox({
-        selector: '#gallery .glightbox',
-        touchNavigation: true,
-        loop: true,
-        zoomable: true,
-        autoplayVideos: false
-      });
-    }
-  }
-
-  // Load GLightbox if not loaded already
-  if (typeof GLightbox === 'undefined') {
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = 'https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css';
-    document.head.appendChild(link);
-
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js';
-    script.onload = initGLightbox;
-    document.body.appendChild(script);
-  } else {
-    initGLightbox();
-  }
-})();
-</script>
