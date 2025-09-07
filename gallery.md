@@ -40,7 +40,7 @@ permalink: /gallery/
          class="glightbox" 
          data-gallery="gallery1" 
          data-title="{{ file.name }}">
-        <img src="{{ file.path | relative_url }}" loading="lazy" alt="{{ file.name }}">
+        <img src="{{ file.path | relative_url }}" loading="lazy" width="250" heiight="250" alt="{{ file.name }}">
       </a>
     {% endif %}
   {% endfor %}
