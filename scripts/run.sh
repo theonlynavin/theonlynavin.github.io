@@ -1,0 +1,4 @@
+bundle exec jekyll serve \
+  --livereload \
+  --open-url \
+  --incremental

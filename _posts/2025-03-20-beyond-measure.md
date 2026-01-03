@@ -9,15 +9,6 @@ tags:
 layout: post
 last_modified_at: 2025-07-14T14:25:52-05:00
 ---
-<script>
-  MathJax = {
-    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
-    svg: { fontCache: 'global' }
-  };
-</script>
-<script id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-</script>
  
 I'd like to turn the next few paragraphs into a conversation between us. Along the way, I hope to answer any questions that naturally arise in your mind. My words here will attempt to be a “gotcha” — but in a good way. What I want to show you in the next five minutes is that measuring things is not as innocent as it seems. To many, the act of measuring and comparing might feel trivial. If you think measuring is just an insignificant exercise, then by the end of this read, I hope to convince you otherwise — that measurement is an art, far from trivial.
 

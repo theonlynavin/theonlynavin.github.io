@@ -87,6 +87,9 @@ collections:
     output: true
     permalink: /:collection/:path/
 
+  gallery:
+    output: false
+
 # Front Matter Defaults
 defaults:
   # Post defaults

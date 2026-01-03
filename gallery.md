@@ -2,46 +2,32 @@
 layout: gallery 
 title: Gallery
 permalink: /gallery/
+gallery: true
 ---
-<style>
-  /* Masonry layout */
-  .masonry {
-    column-count: auto;
-    column-width: 250px;
-    column-gap: 1rem;
-  }
-  .masonry a {
-    display: block;
-    margin-bottom: 1rem;
-    break-inside: avoid;
-  }
-  .masonry img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 12px;
-    transform: scale(1);
-    opacity: 1;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.6s ease;
-  }
-  .masonry img:hover {
-    transform: scale(1.03);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  }
-</style>
 
-<!-- Masonry gallery -->
-<div class="masonry" id="gallery">
-  {% assign gallery_path = "assets/gallery" %}
-  {% for file in site.static_files %}
-    {% if file.path contains gallery_path %}
-      <a href="{{ file.path | relative_url }}" 
-         class="glightbox" 
-         data-gallery="gallery1" 
-         data-title="{{ file.name }}">
-        <img src="{{ file.path | relative_url }}" loading="lazy" width="250" heiight="250" alt="{{ file.name }}">
-      </a>
-    {% endif %}
+<div id="gallery" class="gallery-grid">
+  {% for item in site.gallery %}
+    {% assign id = item.path | split:'/' | last | split:'.' | first %}
+    <div class="gallery-item">
+      <img
+        class="gallery-img"
+        data-id="{{ id }}"
+        data-thumb="{{ '/assets/gallery/thumbs/' | append: item.image | relative_url }}"
+        data-full="{{ '/assets/gallery/originals/' | append: item.image | relative_url }}"
+        data-caption="{{ item.caption }}"
+        data-taken="{{ item.taken }}"
+        alt="{{ item.caption }}"
+      >
+    </div>
   {% endfor %}
+</div>
+
+<div id="overlay" class="overlay hidden">
+  <div class="overlay-inner">
+    <img id="overlay-img">
+    <div class="overlay-meta">
+      <p id="overlay-caption"></p>
+      <p id="overlay-date"></p>
+    </div>
+  </div>
 </div>
