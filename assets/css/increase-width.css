@@ -1,0 +1,6 @@
+.page-wrapper,
+.site-content {
+  max-width: 65rem;
+  margin-left: auto;
+  margin-right: auto;
+}
