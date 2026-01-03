@@ -1,7 +1,7 @@
 ---
 title: "Nichijou"
 image: 
-  path: /assets/images/handpicks/nichijou.jpg
-  thumbnail: /assets/images/handpicks/nichijou.jpg
-# caption: "Photo from [Pexels](https://www.pexels.com)"
+  path: /assets/handpicks/nichijou.jpg
+  thumbnail: /assets/handpicks/nichijou.jpg
+link: https://myanimelist.net/anime/10165/Nichijou
 ---
