@@ -1,13 +1,14 @@
 .gallery-grid {
     position: relative;
     width: 100%;
-  }
-  
-  .gallery-item {
+}
+
+.gallery-item {
     position: absolute;
-    width: 320px; /* base column width */
-  }
-  
+    width: 320px;
+    /* base column width */
+}
+
 
 .gallery-img {
     width: 100%;
