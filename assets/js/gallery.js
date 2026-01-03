@@ -47,7 +47,7 @@ imgs.forEach(img => io.observe(img));
    ------------------------------------------------------------ */
 
 function openOverlay(img) {
-  overlay.classList.remove('hidden');
+    overlay.classList.add('visible');
 
   captionEl.textContent = img.dataset.caption || '';
   dateEl.textContent = img.dataset.taken || '';
@@ -64,8 +64,7 @@ function openOverlay(img) {
 }
 
 function closeOverlay() {
-  overlay.classList.add('hidden');
-  overlayImg.src = '';
+  overlay.classList.remove('visible');  overlayImg.src = '';
 
   document.body.style.overflow = '';
 
