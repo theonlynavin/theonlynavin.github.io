@@ -1,3 +1,7 @@
+/* ============================================================
+   DOM references
+   ============================================================ */
+
 const grid = document.querySelector('.gallery-grid');
 const items = Array.from(document.querySelectorAll('.gallery-item'));
 const imgs = Array.from(document.querySelectorAll('.gallery-img'));
@@ -8,30 +12,32 @@ const overlayImg = document.getElementById('overlay-img');
 const captionEl = document.getElementById('overlay-caption');
 const dateEl = document.getElementById('overlay-date');
 
-/* Masonry configuration */
 
-function getColumnMetrics() {
-    const totalGap = (COLUMNS - 1) * GAP_PERCENT;
-    const columnWidth = (100 - totalGap) / COLUMNS;
-    return { columnWidth, gap: GAP_PERCENT };
-}
+/* ============================================================
+   Masonry configuration
+   ============================================================ */
+
 function getColumnConfig() {
+    // Mobile-first tuning
     if (window.innerWidth < 420) {
-      return { columns: 2, gap: 3 };
+        return { columns: 2, gap: 3 }; // gap in %
     }
+
     return { columns: 3, gap: 2 };
-  }
-  
+}
 
 let resizeTimer = null;
 
-/* Image loading helper */
 
-function loadImage(img, src, callback) {
-    // Cached image: no loading state
+/* ============================================================
+   Image loading helper
+   ============================================================ */
+
+function loadImage(img, src, onDone) {
+    // Cached image → no loading state
     if (img.complete && img.src === src) {
         img.classList.add('loaded');
-        callback && callback();
+        onDone && onDone();
         return;
     }
 
@@ -39,45 +45,52 @@ function loadImage(img, src, callback) {
 
     img.onload = () => {
         img.classList.add('loaded');
-        callback && callback();
+        onDone && onDone();
     };
 
     img.src = src;
 }
 
-/* Masonry layout */
+
+/* ============================================================
+   Masonry layout engine
+   ============================================================ */
+
 function layoutMasonry() {
     const { columns, gap } = getColumnConfig();
-  
+
     const gridWidth = grid.clientWidth;
     const gapPx = (gap / 100) * gridWidth;
     const columnWidthPx =
-      (gridWidth - gapPx * (columns - 1)) / columns;
-  
+        (gridWidth - gapPx * (columns - 1)) / columns;
+
     const columnHeights = new Array(columns).fill(0);
-  
+
     items.forEach(item => {
-      item.style.width = `${columnWidthPx}px`;
-  
-      const minCol = columnHeights.indexOf(
-        Math.min(...columnHeights)
-      );
-  
-      const x = minCol * (columnWidthPx + gapPx);
-      const y = columnHeights[minCol];
-  
-      item.style.transform = `translate(${x}px, ${y}px)`;
-  
-      columnHeights[minCol] += item.offsetHeight + gapPx;
+        item.style.width = `${columnWidthPx}px`;
+
+        // Find shortest column
+        let minCol = 0;
+        for (let i = 1; i < columns; i++) {
+            if (columnHeights[i] < columnHeights[minCol]) {
+                minCol = i;
+            }
+        }
+
+        const x = minCol * (columnWidthPx + gapPx);
+        const y = columnHeights[minCol];
+
+        item.style.transform = `translate(${x}px, ${y}px)`;
+        columnHeights[minCol] += item.offsetHeight + gapPx;
     });
-  
+
     grid.style.height = `${Math.max(...columnHeights)}px`;
-  }
-  
+}
 
-  
 
-/* Lazy-load thumbnails */
+/* ============================================================
+   Lazy-loading thumbnails
+   ============================================================ */
 
 const observer = new IntersectionObserver(
     entries => {
@@ -94,33 +107,48 @@ const observer = new IntersectionObserver(
 
 imgs.forEach(img => observer.observe(img));
 
-/* Overlay logic */
+
+/* ============================================================
+   Overlay state management
+   ============================================================ */
 
 function openOverlay(img) {
     overlay.classList.add('visible');
-    document.body.style.overflow = 'hidden';
+    document.body.classList.add('overlay-open');
 
     captionEl.textContent = img.dataset.caption || '';
     dateEl.textContent = img.dataset.taken || '';
 
     loadImage(overlayImg, img.dataset.full);
 
-    if (location.hash !== `#${img.dataset.id}`) {
-        history.pushState(null, '', `#${img.dataset.id}`);
+    // Sync URL → overlay state
+    const newHash = `#${img.dataset.id}`;
+    if (location.hash !== newHash) {
+        history.pushState(null, '', newHash);
     }
 }
 
-function closeOverlay() {
+function closeOverlayUIOnly() {
     overlay.classList.remove('visible');
-    document.body.style.overflow = '';
+    document.body.classList.remove('overlay-open');
     overlayImg.src = '';
-
-    history.pushState(null, '', window.location.pathname);
 }
 
-/* Event wiring */
+function closeOverlay() {
+    closeOverlayUIOnly();
 
-// Thumbnail → open overlay
+    // Sync overlay state → URL
+    if (location.hash) {
+        history.pushState(null, '', window.location.pathname);
+    }
+}
+
+
+/* ============================================================
+   Event wiring
+   ============================================================ */
+
+// Thumbnails → open overlay
 imgs.forEach(img => {
     img.addEventListener('click', () => openOverlay(img));
 });
@@ -128,7 +156,7 @@ imgs.forEach(img => {
 // Backdrop → close overlay
 overlay.addEventListener('click', closeOverlay);
 
-// Inner content → do not close
+// Overlay content → do not close
 overlayInner.addEventListener('click', e => {
     e.stopPropagation();
 });
@@ -140,13 +168,18 @@ document.addEventListener('keydown', e => {
     }
 });
 
-// Window resize → relayout masonry (debounced)
+// Resize → recompute masonry (debounced)
 window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(layoutMasonry, 150);
 });
 
-/* Restore overlay from URL hash */
+
+/* ============================================================
+   URL / history synchronization
+   ============================================================ */
+
+// Initial load (deep-link support)
 window.addEventListener('load', () => {
     layoutMasonry();
 
@@ -155,4 +188,20 @@ window.addEventListener('load', () => {
     const id = location.hash.slice(1);
     const target = imgs.find(img => img.dataset.id === id);
     if (target) openOverlay(target);
+});
+
+// Back / forward navigation
+window.addEventListener('popstate', () => {
+    // Back → close overlay
+    if (!location.hash && overlay.classList.contains('visible')) {
+        closeOverlayUIOnly();
+        return;
+    }
+
+    // Forward → reopen overlay
+    if (location.hash && !overlay.classList.contains('visible')) {
+        const id = location.hash.slice(1);
+        const target = imgs.find(img => img.dataset.id === id);
+        if (target) openOverlay(target);
+    }
 });
