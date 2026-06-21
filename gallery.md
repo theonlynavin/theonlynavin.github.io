@@ -34,7 +34,6 @@ gallery: true
     <div class="overlay-meta">
       <p id="overlay-caption"></p>
       <p id="overlay-date"></p>
-      <p id="overlay-counter"></p>
     </div>
   </div>
 

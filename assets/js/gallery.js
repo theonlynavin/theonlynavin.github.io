@@ -13,7 +13,6 @@ const captionEl = document.getElementById('overlay-caption');
 const dateEl = document.getElementById('overlay-date');
 const prevBtn = document.querySelector('.overlay-prev');
 const nextBtn = document.querySelector('.overlay-next');
-const counterEl = document.getElementById('overlay-counter');
 
 let currentIndex = -1;
 
@@ -172,10 +171,6 @@ function openOverlay(img, index = imgs.indexOf(img)) {
   const newHash = `#${img.dataset.id}`;
   if (location.hash !== newHash) {
     history.pushState(null, '', newHash);
-  }
-  if (counterEl) {
-    counterEl.textContent =
-      `${currentIndex + 1} / ${imgs.length}`;
   }
 }
 

@@ -3,5 +3,5 @@ image: cats/catler.jpeg
 thumb: cats/catler.jpeg
 category: cats
 caption: "Catler"
-taken: "?"
+taken: "13 Aug 2025"
 ---
