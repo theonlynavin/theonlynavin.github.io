@@ -3,7 +3,6 @@ title: "Beyond Measure?"
 categories:
   - Mathematics
 tags:
-  - mathematics
   - measure theory
   - paradox
 layout: post
