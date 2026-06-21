@@ -2,6 +2,6 @@
 image: cats/close_cat.jpg
 thumb: cats/close_cat.jpg
 category: cats
-caption: ""
-taken: ""
+caption: "Side eye"
+taken: "20 Jan 2025"
 ---

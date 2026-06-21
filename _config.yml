@@ -48,6 +48,11 @@ markdown: kramdown
 feed:
   path: atom.xml
 
+kramdown:
+  math_engine: mathjax
+  syntax_highlighter_opts:
+    disable: true
+
 # Pagination - https://jekyllrb.com/docs/pagination/
 paginate: 10
 paginate_path: /page:num/

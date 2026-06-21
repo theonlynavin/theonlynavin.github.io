@@ -2,6 +2,6 @@
 image: cats/evening_loaf.jpeg
 thumb: cats/evening_loaf.jpeg
 category: cats
-caption: ""
-taken: ""
+caption: "Done for the day"
+taken: "20 Oct 2024"
 ---

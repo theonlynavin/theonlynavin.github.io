@@ -2,6 +2,6 @@
 image: cats/walk.jpeg
 thumb: cats/walk.jpeg
 category: cats
-caption: ""
-taken: ""
+caption: "Here I come"
+taken: "4 Oct 2024"
 ---

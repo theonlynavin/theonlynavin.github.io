@@ -2,6 +2,6 @@
 image: cats/eating.jpg
 thumb: cats/eating.jpg
 category: cats
-caption: ""
-taken: ""
+caption: "Nutrition"
+taken: "10 Apr 2025"
 ---

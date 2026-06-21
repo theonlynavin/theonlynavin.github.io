@@ -2,6 +2,6 @@
 image: misc/walk.jpg
 thumb: misc/walk.jpg
 category: misc
-caption: ""
-taken: ""
+caption: "Walk"
+taken: "8 June 2025"
 ---

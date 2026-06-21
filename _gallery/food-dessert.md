@@ -2,6 +2,6 @@
 image: food/dessert.jpg
 thumb: food/dessert.jpg
 category: food
-caption: ""
-taken: ""
+caption: "A thing"
+taken: "20 Oct 2024"
 ---

@@ -2,6 +2,6 @@
 image: cats/huh.jpeg
 thumb: cats/huh.jpeg
 category: cats
-caption: ""
-taken: ""
+caption: "Huh?"
+taken: "19 Oct 2024"
 ---

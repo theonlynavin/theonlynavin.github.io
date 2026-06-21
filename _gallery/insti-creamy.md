@@ -2,6 +2,6 @@
 image: insti/creamy.jpg
 thumb: insti/creamy.jpg
 category: insti
-caption: ""
-taken: ""
+caption: "Creamy stone"
+taken: "25 Jan 2025"
 ---
