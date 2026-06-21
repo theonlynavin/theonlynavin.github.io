@@ -1,3 +1,11 @@
+:root {
+    --gallery-radius: 6px;
+}
+
+/* ============================================================
+   Gallery Grid
+   ============================================================ */
+
 .gallery-grid {
     position: relative;
     width: 100%;
@@ -5,17 +13,15 @@
 
 .gallery-item {
     position: absolute;
-    /* base column width */
 }
 
 .gallery-img {
-    width: 100%;
     display: block;
+    width: 100%;
 
-    border-radius: 6px;
+    border-radius: var(--gallery-radius);
     user-select: none;
 
-    will-change: transform;
     transition:
         filter 0.45s ease,
         transform 0.25s ease,
@@ -28,7 +34,10 @@
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
 }
 
-/* Overlay */
+
+/* ============================================================
+   Overlay Container
+   ============================================================ */
 
 .overlay {
     position: fixed;
@@ -39,18 +48,64 @@
     justify-content: center;
 
     background: rgba(0, 0, 0, 0.85);
+
     z-index: 9999;
 
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.25s ease;
 
+    transition: opacity 0.25s ease;
 }
 
 .overlay.visible {
     opacity: 1;
     pointer-events: auto;
 }
+
+
+/* ============================================================
+   Overlay Navigation
+   ============================================================ */
+
+.overlay-nav {
+    position: fixed;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    font-size: 1.5rem;
+    font-weight: 300;
+
+    color: rgba(255,255,255,0.2);
+
+    cursor: pointer;
+    user-select: none;
+
+    z-index: 10001;
+
+    transition:
+        color 0.2s ease,
+        text-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.overlay-nav:hover {
+    color: rgba(255,255,255,0.6);
+    transform: translateY(-50%) scale(1.15);
+}
+
+.overlay-prev {
+    left: 12px;
+}
+
+.overlay-next {
+    right: 12px;
+}
+
+
+/* ============================================================
+   Overlay Content
+   ============================================================ */
 
 .overlay-inner {
     max-width: 90vw;
@@ -60,32 +115,61 @@
     flex-direction: column;
     align-items: center;
 
-    transform: scale(0.96);
-    transition: transform 0.25s ease;
+    opacity: 0;
+    transform: scale(0.98);
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
 }
 
 .overlay.visible .overlay-inner {
+    opacity: 1;
     transform: scale(1);
 }
+
+
+/* ============================================================
+   Overlay Image
+   ============================================================ */
 
 .overlay-inner img {
     max-width: 100%;
     max-height: 80vh;
 
-    border-radius: 6px;
-    cursor: zoom-out;
+    border-radius: var(--gallery-radius);
     user-select: none;
 
     filter: blur(6px);
-    transition: filter 0.45s ease;
+
+    cursor: zoom-in;
+    transform-origin: center center;
+
+    transition:
+        filter 0.45s ease,
+        transform 0.15s ease;
 }
 
 .overlay-inner img.loaded {
     filter: blur(0);
 }
 
+.overlay-inner img.zoomed {
+    cursor: grab;
+}
+
+.overlay-inner img.zoomed:active {
+    cursor: grabbing;
+}
+
+
+/* ============================================================
+   Overlay Metadata
+   ============================================================ */
+
 .overlay-meta {
     margin-top: 0.75rem;
+
     text-align: center;
 
     color: #eee;

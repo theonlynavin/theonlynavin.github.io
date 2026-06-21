@@ -11,6 +11,11 @@ const overlayInner = overlay.querySelector('.overlay-inner');
 const overlayImg = document.getElementById('overlay-img');
 const captionEl = document.getElementById('overlay-caption');
 const dateEl = document.getElementById('overlay-date');
+const prevBtn = document.querySelector('.overlay-prev');
+const nextBtn = document.querySelector('.overlay-next');
+const counterEl = document.getElementById('overlay-counter');
+
+let currentIndex = -1;
 
 /* ============================================================
 Deterministic shuffle
@@ -152,7 +157,10 @@ imgs.forEach(img => observer.observe(img));
    Overlay logic
    ============================================================ */
 
-function openOverlay(img) {
+function openOverlay(img, index = imgs.indexOf(img)) {
+  resetTransform();
+
+  currentIndex = index;
   overlay.classList.add('visible');
   document.body.classList.add('overlay-open');
 
@@ -164,6 +172,10 @@ function openOverlay(img) {
   const newHash = `#${img.dataset.id}`;
   if (location.hash !== newHash) {
     history.pushState(null, '', newHash);
+  }
+  if (counterEl) {
+    counterEl.textContent =
+      `${currentIndex + 1} / ${imgs.length}`;
   }
 }
 
@@ -183,19 +195,64 @@ function closeOverlay() {
 }
 
 /* ============================================================
+Image indexing
+============================================================ */
+
+function showIndex(index) {
+  if (index < 0)
+    index = imgs.length - 1;
+
+  if (index >= imgs.length)
+    index = 0;
+
+  currentIndex = index;
+
+  const img = imgs[index];
+
+  captionEl.textContent = img.dataset.caption || '';
+  dateEl.textContent = img.dataset.taken || '';
+
+  resetTransform();
+  loadOverlayImage(img.dataset.full);
+
+  history.replaceState(
+    null,
+    '',
+    `#${img.dataset.id}`
+  );
+
+  if (counterEl) {
+    counterEl.textContent =
+      `${index + 1} / ${imgs.length}`;
+  }
+}
+
+function nextImage() {
+  showIndex(currentIndex + 1);
+}
+
+function previousImage() {
+  showIndex(currentIndex - 1);
+}
+
+/* ============================================================
 Overlay zoom & pan
 ============================================================ */
 
 let zoomed = false;
 let scale = 1;
+
 let translateX = 0;
 let translateY = 0;
 
 let startX = 0;
 let startY = 0;
-let dragging = false;
 
-const MAX_ZOOM = 2.5;
+let dragging = false;
+let dragDistance = 0;
+
+const ZOOM_SCALE = 2.5;
+const DRAG_THRESHOLD = 10;
 
 function applyTransform() {
   overlayImg.style.transform =
@@ -226,18 +283,27 @@ overlayInner.addEventListener('click', e => {
 });
 
 overlayImg.addEventListener('click', e => {
-  if (!overlay.classList.contains('visible')) return;
+  if (!overlay.classList.contains('visible'))
+    return;
 
-  // Prevent overlay close
   e.stopPropagation();
 
+  if (dragDistance > DRAG_THRESHOLD) {
+    dragDistance = 0;
+    return;
+  }
+
   const rect = overlayImg.getBoundingClientRect();
-  const offsetX = e.clientX - rect.left - rect.width / 2;
-  const offsetY = e.clientY - rect.top - rect.height / 2;
+
+  const offsetX =
+    e.clientX - rect.left - rect.width / 2;
+
+  const offsetY =
+    e.clientY - rect.top - rect.height / 2;
 
   if (!zoomed) {
     zoomed = true;
-    scale = MAX_ZOOM;
+    scale = ZOOM_SCALE;
 
     translateX = -offsetX * (scale - 1);
     translateY = -offsetY * (scale - 1);
@@ -250,17 +316,41 @@ overlayImg.addEventListener('click', e => {
 });
 
 overlayImg.addEventListener('mousedown', e => {
-  if (!zoomed) return;
+  if (!zoomed)
+    return;
+
   dragging = true;
+  dragDistance = 0;
+
   startX = e.clientX - translateX;
   startY = e.clientY - translateY;
+
   e.preventDefault();
 });
 
 window.addEventListener('mousemove', e => {
-  if (!dragging) return;
-  translateX = e.clientX - startX;
-  translateY = e.clientY - startY;
+  if (!dragging)
+    return;
+
+  const newX = e.clientX - startX;
+  const newY = e.clientY - startY;
+
+  dragDistance +=
+    Math.abs(newX - translateX) +
+    Math.abs(newY - translateY);
+
+  translateX = newX;
+  translateY = newY;
+
+  const limitX = overlayImg.clientWidth;
+  const limitY = overlayImg.clientHeight;
+
+  translateX =
+    Math.max(-limitX, Math.min(limitX, translateX));
+
+  translateY =
+    Math.max(-limitY, Math.min(limitY, translateY));
+
   applyTransform();
 });
 
@@ -286,10 +376,32 @@ overlayImg.addEventListener('touchend', () => {
   dragging = false;
 });
 
+prevBtn?.addEventListener('click', e => {
+  e.stopPropagation();
+  previousImage();
+});
+
+nextBtn?.addEventListener('click', e => {
+  e.stopPropagation();
+  nextImage();
+});
 
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && overlay.classList.contains('visible')) {
-    closeOverlay();
+  if (!overlay.classList.contains('visible'))
+    return;
+
+  switch (e.key) {
+    case 'Escape':
+      closeOverlay();
+      break;
+
+    case 'ArrowLeft':
+      previousImage();
+      break;
+
+    case 'ArrowRight':
+      nextImage();
+      break;
   }
 });
 

@@ -23,11 +23,23 @@ gallery: true
 </div>
 
 <div id="overlay" class="overlay hidden">
+
+  <div class="overlay-nav overlay-prev" aria-label="Previous image">
+    &#10094;
+  </div>
+
   <div class="overlay-inner">
     <img id="overlay-img">
+
     <div class="overlay-meta">
       <p id="overlay-caption"></p>
       <p id="overlay-date"></p>
+      <p id="overlay-counter"></p>
     </div>
   </div>
+
+  <div class="overlay-nav overlay-next" aria-label="Next image">
+    &#10095;
+  </div>
+
 </div>
