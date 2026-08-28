@@ -2,6 +2,6 @@
 image: scenic/duckos.jpg
 thumb: scenic/duckos.jpg
 category: scenic
-caption: ""
-taken: ""
+caption: "Duckos"
+taken: "29 Jun 2025"
 ---

@@ -2,6 +2,6 @@
 image: scenic/feet.jpg
 thumb: scenic/feet.jpg
 category: scenic
-caption: ""
-taken: ""
+caption: "Feet"
+taken: "10 Jan 2024"
 ---

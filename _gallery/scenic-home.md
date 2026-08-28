@@ -2,6 +2,6 @@
 image: scenic/home.jpg
 thumb: scenic/home.jpg
 category: scenic
-caption: ""
-taken: ""
+caption: "Towering home"
+taken: "31 May 2025"
 ---

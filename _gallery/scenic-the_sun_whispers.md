@@ -2,6 +2,6 @@
 image: scenic/the_sun_whispers.jpg
 thumb: scenic/the_sun_whispers.jpg
 category: scenic
-caption: ""
-taken: ""
+caption: "The sun whispers"
+taken: "18 Mar 2024"
 ---

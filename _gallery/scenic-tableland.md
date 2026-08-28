@@ -2,6 +2,6 @@
 image: scenic/tableland.jpg
 thumb: scenic/tableland.jpg
 category: scenic
-caption: ""
-taken: ""
+caption: "A tableland"
+taken: "29 Nov 2024"
 ---
