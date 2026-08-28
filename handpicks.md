@@ -7,7 +7,7 @@ entries_layout: grid
 ---
 
 
-> A collection of movies, video games and animes that I think you should try out!
+> A collection of movies, bands, video games and animes that I think you should try out!
 
 <style>
   img {
