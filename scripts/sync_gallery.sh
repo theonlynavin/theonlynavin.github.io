@@ -18,6 +18,7 @@ for img in "$ORIG_DIR"/**/*.{jpg,jpeg,png,JPG,JPEG,PNG}; do
 
   filename="$(basename "$img")"
   name="${filename%.*}"
+  taken="$(exiftool -s3 -DateTimeOriginal -d '%d %b %Y' "$img")"
 
   # Category = first directory component
   category="$(dirname "$rel_path")"
@@ -51,7 +52,7 @@ image: $rel_path
 thumb: $rel_path
 category: $category
 caption: ""
-taken: ""
+taken: "$taken"
 ---
 EOF
   fi
